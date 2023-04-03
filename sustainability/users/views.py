@@ -11,7 +11,7 @@ from .models import Profile
 
 
 def home(request):
-    return render(request, 'users/home.html')
+    return render(request, 'index.html')
 
 
 class RegisterView(View):

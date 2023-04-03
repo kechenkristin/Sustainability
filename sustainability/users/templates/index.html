@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} Home Page {% endblock title %}
+{% block content %}
+
+    <!-- page header -->
+    <header id="home" class="header">
+        <div class="overlay"></div>
+        <div class="header-content container">
+            <h1 class="header-title">
+                <span class="up">HI!</span>
+                <span class="down">{{ user.first_name.title|default:'Guest' }}</span>
+            </h1>
+            <p class="header-subtitle">FRONTEND WEB DESIGNER</p>
+
+            {% if user.is_authenticated %}
+                <a class="btn btn-primary btn-lg" href="{% url 'logout' %}" role="button">Logout</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'users-profile' %}" role="button">Profile</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'users-profile-edit' %}" role="button">Edit Profile</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'news_board' %}" role="button">News</a>
+            {% else %}
+                <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'users-register' %}" role="button">Register</a>
+            {% endif %}
+
+        </div>
+    </header><!-- end of page header -->
+{% endblock %}
