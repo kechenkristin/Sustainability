@@ -55,7 +55,7 @@ directionsService.route(
 // Function to update the public transport route
 function updatePublicTransportRoute(start, end, infoElementId, renderer) {
 const transitMode = google.maps.TransitMode.TRAIN; // or use 'BUS' or 'SUBWAY' or 'TRAM'
-const co2Factor = 76;
+const co2Factor = 55.9;
 
 const request = {
   origins: [start],
