@@ -10,7 +10,7 @@ class Profile(models.Model):
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
     bio = models.TextField()
     points = models.IntegerField(default=0)
-    event_id = models.IntegerField(null=True)
+    event_id = models.IntegerField(default=0)
 
 
     def __str__(self):

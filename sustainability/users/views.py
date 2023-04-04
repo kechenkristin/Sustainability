@@ -85,8 +85,10 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
 def profile(request):
     uid = request.user.id
     profile = Profile.objects.filter(id=uid).first()
-    event = Event.objects.get(id=profile.event_id)
-    return render(request, 'users/profile.html', {'obj': profile, 'event': event})
+    if profile.event_id != 0:
+        event = Event.objects.get(id=profile.event_id)
+        return render(request, 'users/profile.html', {'obj': profile, 'event': event, 'is_event': 1})
+    return render(request, 'users/profile.html', {'obj': profile, 'is_event': 0})
 
 
 @login_required
