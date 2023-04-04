@@ -12,7 +12,8 @@
                             <th>Id</th>
                             <th>Img</th>
                             <th>UserName</th>
-                            <th>Profile</th>
+                            <th>Points</th>
+                            <th>Operate Profile</th>
                         </tr>
                         </thead>
 
@@ -25,6 +26,7 @@
                                         alt="avatar"
                                         class="rounded-circle img-fluid" style="width: 150px;"></th>
                                 <th>{{ obj.user.username }}</th>
+                                <th>{{ obj.points }}</th>
                                 <th>
                                     <a class="btn btn-primary" href="/users/{{ obj.id }}/profile">See Profile</a>
                                     {% if cuid == obj.id %}

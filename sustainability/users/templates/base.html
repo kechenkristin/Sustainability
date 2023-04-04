@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
     <!-- font icons -->
-    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="{% static 'vendors/themify-icons/css/themify-icons.css' %}">
 
     <!-- Bootstrap + Meyawo main styles -->
     <link rel="stylesheet" href="{% static 'css/meyawo.css' %}">
@@ -39,16 +39,16 @@
             </li>
             {% if user.is_authenticated %}
                 <li class="item">
-                    <a class="link" href="{% url 'users-profile-edit' %}">User Profile Edit</a>
-                </li>
-                <li class="item">
                     <a class="link" href="{% url 'users-profile' %}">Profile</a>
                 </li>
                 <li class="item">
                     <a class="link" href="{% url 'news_board' %}">News</a>
                 </li>
-                 <li class="item">
+                <li class="item">
                     <a class="link" href="{% url 'leaderboard' %}">Leaderboard</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="{% url 'event_list' %}">Events</a>
                 </li>
                 <li class="item">
                     <a class="link" href="{% url 'logout' %}">Logout</a>

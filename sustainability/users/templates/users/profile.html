@@ -10,7 +10,7 @@
                     <div class="col-lg-4">
                         <div class="card mb-4">
                             <div class="card-body text-center">
-                                <img src="{{ user.profile.avatar.url }}"
+                                <img src="{{ obj.avatar.url }}"
                                      alt="avatar"
                                      class="rounded-circle img-fluid" style="width: 150px;">
                                 <h5 class="my-3">{{ obj.user.username }}</h5>
@@ -69,8 +69,8 @@
                             <div class="col-md-6">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
-                                        <p class="mb-4">Badges</p>
-                                        <p class="mb-1" style="font-size: .77rem;">Badge1</p>
+                                        <p class="mb-4">Event Attending</p>
+                                        <p class="mb-1" style="font-size: .77rem;">{{ obj.event }}</p>
                                         <div></div>
                                     </div>
                                 </div>
