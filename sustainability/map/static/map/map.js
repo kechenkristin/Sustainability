@@ -1,7 +1,8 @@
 // Initialize the map
 const map = new google.maps.Map(document.getElementById('map'), {
-  center: { lat: 50.733218984142624, lng: -3.5352645494120023 },
-  zoom: 15
+  center: { lat: 50.725948447673765, lng: -3.5273826065394425 }, 
+  zoom: 15,
+  mapTypeId: 'hybrid',
 });
 
 // lat: 50.733218984142624, lng: -3.5352645494120023
