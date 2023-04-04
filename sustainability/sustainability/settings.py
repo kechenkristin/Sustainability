@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'users',
     'news',
     'event',
+    'chat',
     'qr_code',
 ]
 
