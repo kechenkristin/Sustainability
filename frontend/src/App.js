@@ -8,7 +8,7 @@ function App() {
   return (
       <Router>
         <Routes>
-            <Route path = '/' element = {<Chat></Chat>}></Route>
+            <Route path = '/react/' element = {<Chat></Chat>}></Route>
         </Routes>
       </Router>
   );

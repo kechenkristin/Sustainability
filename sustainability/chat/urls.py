@@ -1,6 +1,6 @@
-from django.urls import path
+from django.urls import path,re_path
 from . import views
 
 urlpatterns = [
-    path('', views.react_app, name='chat'),
+    re_path(r".*", views.react_app, name='chat'),
 ]
