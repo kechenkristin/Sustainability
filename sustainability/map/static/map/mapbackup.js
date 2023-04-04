@@ -124,12 +124,12 @@ function updatePublicTransportRoute(start, end, infoElementId, renderer, googleM
   });
 }
 
-function updateDatabase() {
+function updateDatabase(scoreUpdate) {
   const csrftoken = getCookie('csrftoken');
 
   // Add data to send to the server
   const data = {
-    some_field: "some_value"
+    score_increment: scoreUpdate
   };
 
   fetch('update_database/', {
@@ -162,6 +162,7 @@ function updateDatabase() {
 
 
 
+
 // Get CSRF token from cookies
 function getCookie(name) {
   let cookieValue = null;
@@ -184,10 +185,11 @@ const publicTransportMapsLinkElement = document.getElementById('public-transport
 const cyclingMapsLinkElement = document.getElementById('cycling-maps-link');
 const walkingMapsLinkElement = document.getElementById('walking-maps-link');
 
-drivingMapsLinkElement.addEventListener('click', updateDatabase);
-publicTransportMapsLinkElement.addEventListener('click', updateDatabase);
-cyclingMapsLinkElement.addEventListener('click', updateDatabase);
-walkingMapsLinkElement.addEventListener('click', updateDatabase);
+drivingMapsLinkElement.addEventListener('click', () => updateDatabase(0));
+publicTransportMapsLinkElement.addEventListener('click', () => updateDatabase(1));
+cyclingMapsLinkElement.addEventListener('click', () => updateDatabase(4));
+walkingMapsLinkElement.addEventListener('click', () => updateDatabase(5));
+
 
 
 // Handle the submit button click
