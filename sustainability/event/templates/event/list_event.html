@@ -22,6 +22,7 @@
                             <div class="card-body p-4">
                                 <!-- add badge here -->
                                 <h3 class="mb-3">{{ obj.event_name }}</h3>
+
                                 <p class="small mb-0"><i class="far fa-star fa-lg"></i> <span class="mx-2">|</span>
                                     Created
                                     by
@@ -31,10 +32,10 @@
                                 <p class="small mb-0"><i class="far fa-star fa-lg"></i> <span class="mx-2">|</span>
                                     Participants:
                                     <strong>{{ obj.event_participant.user.username }}</strong></p>
-                                <p class="small mb-0">{{ obj.event_url }}</p>
                                 <hr class="my-4">
                                 <p class="small mb-0">{{ obj.event_description }}</p>
                                 <hr class="my-4">
+                                <a class="btn btn-link" type="button" href="{{ obj.event_url }}">Event Link</a>
                                 <a class="btn btn-primary" type="button" href="/event/{{ obj.id }}/attend">Attend</a>
                                 <a class="btn btn-primary" type="button" href="/event/{{ obj.id }}/finish">Finish</a>
 

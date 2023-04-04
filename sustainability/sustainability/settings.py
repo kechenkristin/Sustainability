@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'users',
     'news',
     'event',
+    'qr_code',
 ]
 
 MIDDLEWARE = [

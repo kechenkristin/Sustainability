@@ -6,6 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views import View
 from django.contrib.auth.decorators import login_required
 
+from event.models import Event
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 from .models import Profile
 
@@ -79,11 +80,14 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     success_message = "Successfully Changed Your Password"
     success_url = reverse_lazy('users-home')
 
+
 @login_required
 def profile(request):
     uid = request.user.id
     profile = Profile.objects.filter(id=uid).first()
-    return render(request, 'users/profile.html', {'obj': profile})
+    event = Event.objects.get(id=profile.event_id)
+    return render(request, 'users/profile.html', {'obj': profile, 'event': event})
+
 
 @login_required
 def profile_edit(request):
@@ -103,19 +107,23 @@ def profile_edit(request):
     return render(request, 'users/profile_edit.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
-
 """
 leaderboard
 """
+
+
 @login_required
 def leaderboard(request):
     cuid = request.user.id
     user_profile_list = Profile.objects.all()
-    return render(request, 'users/leaderboard.html', {'user_profile_list': user_profile_list, 'cuid':cuid})
+    return render(request, 'users/leaderboard.html', {'user_profile_list': user_profile_list, 'cuid': cuid})
+
 
 """
 access profile through user Id
 """
+
+
 @login_required
 def profile_id(request, uid):
     profile = Profile.objects.filter(id=uid).first()
