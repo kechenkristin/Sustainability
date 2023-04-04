@@ -39,9 +39,10 @@ directionsService.route(
 
       // Calculate CO2 emissions
       const co2Emissions = Math.round(distanceInKm * co2Factor);
+      const moneySaved = 2;
 
       const infoElement = document.getElementById(infoElementId);
-      infoElement.innerHTML = `<strong>${mode}</strong><br>Distance: ${distance}<br>Duration: ${duration}<br>CO2 Emitted: ${co2Emissions} grams`;
+      infoElement.innerHTML = `<strong>${mode}</strong><br>Distance: ${distance}<br>Duration: ${duration}<br>CO2 Emitted: ${co2Emissions} grams<br> Cost of trip: ${moneySaved}`;
 
       // Set the route for the renderer
       renderer.setDirections(response);
@@ -77,9 +78,10 @@ matrixService.getDistanceMatrix(request, (response, status) => {
 
     // Calculate CO2 emissions
     const co2Emissions = Math.round(distanceInKm * co2Factor);
+    const moneySaved = 2;
 
     const infoElement = document.getElementById(infoElementId);
-    infoElement.innerHTML = `<strong>Public Transport</strong><br>Distance: ${distance}<br>Duration: ${duration}<br>CO2 Emitted: ${co2Emissions} grams`;
+    infoElement.innerHTML = `<strong>Public Transport</strong><br>Distance: ${distance}<br>Duration: ${duration}<br>CO2 Emitted: ${co2Emissions} grams<br> Cost of trip: £${moneySaved}`;
 
     directionsService.route(
       {
