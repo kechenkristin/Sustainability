@@ -47,7 +47,7 @@ function updateRoute(start, end, mode, infoElementId, renderer, co2Factor, costF
         const cost = mode === google.maps.TravelMode.WALKING ? '<strong>FREE</strong>' : `£${(distanceInKm * costFactor).toFixed(2)}`;
 
         const infoElement = document.getElementById(infoElementId);
-        infoElement.innerHTML = `<strong>${mode}</strong><br>Distance: ${distance}<br>Duration: ${duration}<br>CO2 Emitted: ${co2Emissions} grams<br> Cost of trip: ${cost}`;
+infoElement.innerHTML = `<strong>${mode}</strong><br>Distance: ${distance}<br>Duration: ${duration}<br><span class="info-value">CO2 Emitted: ${co2Emissions} grams</span><br><span class="info-value"> Cost of trip: ${cost}</span>`;
     // Create the Google Maps link
     const googleMapsLinkElement = document.getElementById(googleMapsLinkElementId);
   const googleMapsLink = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(start)}&destination=${encodeURIComponent(end)}&travelmode=${mode.toLowerCase()}`;
@@ -94,7 +94,7 @@ function updatePublicTransportRoute(start, end, infoElementId, renderer, googleM
       const moneySaved = 2;
 
       const infoElement = document.getElementById(infoElementId);
-      infoElement.innerHTML = `<strong>Public Transport</strong><br>Distance: ${distance}<br>Duration: ${duration}<br>CO2 Emitted: ${co2Emissions} grams<br> Cost of trip: £${moneySaved}`;
+      infoElement.innerHTML = `<strong>Public Transport</strong><br>Distance: ${distance}<br>Duration: ${duration}<br><span class="co2-cost"><strong>CO2 Emitted: ${co2Emissions} grams</strong></span><br> <span class="co2-cost"><strong>Cost of trip: £${moneySaved}</strong></span>`;
 
       directionsService.route(
         {

@@ -20,11 +20,20 @@
             height: 70%;
         }
         #search-container {
-            position: absolute;
-            top: 10%;
-            left: 0;
-            width: 20%;
-        }
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        width: 40%; /* Increase the width to make room for both elements */
+        transform: translateX(-50%);
+        display: flex; /* Add flex display to allow for side by side elements */
+        justify-content: center; /* Center the elements horizontally within the container */
+        align-items: center; /* Center the elements vertically within the container */
+    }
+
+    #search-container input {
+        margin-right: 5px; /* Add a small margin between the elements */
+    }
+
         #table-container {
             position: absolute;
             bottom: 0;
@@ -43,19 +52,29 @@
         #start-input, #end-input {
             padding: 5px;
             margin-right: 5px;
+            width: 100%;
         }
         #info-container {
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        top: 50px;
-        left: 130px;
-        }
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 50px;
+    left: 50%; /* Center the container horizontally */
+    transform: translateX(-50%);
+}
+
 
         .info {
             margin-right: 10px;
+        }
+        .info-value {
+        font-size: 18px;
+        font-weight: bold;
+        }
+        .co2-cost {
+        font-size: 1.2em;
         }
     </style>
 </head>
@@ -78,6 +97,7 @@
     <div id="map"></div>
     <div id="table-container">
         <table>
+            <caption ><strong>Comparison Table</strong></caption>
             <thead>
               <tr>
                 <th>Activity</th>
