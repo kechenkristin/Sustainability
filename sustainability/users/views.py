@@ -101,3 +101,22 @@ def profile_edit(request):
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
     return render(request, 'users/profile_edit.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+
+"""
+leaderboard
+"""
+@login_required
+def leaderboard(request):
+    cuid = request.user.id
+    user_profile_list = Profile.objects.all()
+    return render(request, 'users/leaderboard.html', {'user_profile_list': user_profile_list, 'cuid':cuid})
+
+"""
+access profile through user Id
+"""
+@login_required
+def profile_id(request, uid):
+    profile = Profile.objects.filter(id=uid).first()
+    return render(request, 'users/profile.html', {'obj': profile})

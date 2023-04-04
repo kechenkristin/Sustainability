@@ -20,11 +20,12 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 
-
+from users.views import home
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path('', include('users.urls')),
+                  path('', home, name='users-home'),
+                  path('users/', include('users.urls')),
                   path('news/', include('news.urls')),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
