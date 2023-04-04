@@ -38,7 +38,7 @@ directionsService.route(
       const duration = route.duration.text;
 
       // Calculate CO2 emissions
-      const co2Emissions = (distanceInKm * co2Factor).toFixed(2);
+      const co2Emissions = Math.round(distanceInKm * co2Factor);
 
       const infoElement = document.getElementById(infoElementId);
       infoElement.innerHTML = `<strong>${mode}</strong><br>Distance: ${distance}<br>Duration: ${duration}<br>CO2 Emitted: ${co2Emissions} grams`;
@@ -76,7 +76,7 @@ matrixService.getDistanceMatrix(request, (response, status) => {
     const duration = results[0].duration.text;
 
     // Calculate CO2 emissions
-    const co2Emissions = (distanceInKm * co2Factor).toFixed(2);
+    const co2Emissions = Math.round(distanceInKm * co2Factor);
 
     const infoElement = document.getElementById(infoElementId);
     infoElement.innerHTML = `<strong>Public Transport</strong><br>Distance: ${distance}<br>Duration: ${duration}<br>CO2 Emitted: ${co2Emissions} grams`;
@@ -109,7 +109,7 @@ submitBtn.addEventListener('click', () => {
 const startLocation = startInput.value;
 const endLocation = endInput.value;
 
-updateRoute(startLocation, endLocation, google.maps.TravelMode.DRIVING, 'driving-info', drivingRenderer, 138.4);
+updateRoute(startLocation, endLocation, google.maps.TravelMode.DRIVING, 'driving-info', drivingRenderer, 138);
 updatePublicTransportRoute(startLocation, endLocation, 'public-transport-info', transitRenderer);
 updateRoute(startLocation, endLocation, google.maps.TravelMode.BICYCLING, 'cycling-info', bicyclingRenderer, 10);
 updateRoute(startLocation, endLocation, google.maps.TravelMode.WALKING, 'walking-info', walkingRenderer, 5);
