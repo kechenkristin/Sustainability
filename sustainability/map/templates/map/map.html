@@ -9,23 +9,46 @@
     </script>
     <style>
         #map {
-            height: 500px;
-            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70%;
+            height: 70%;
         }
         #search-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #table-container {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 30%;
+            height: 70%;
+            background-color: rgb(161, 155, 155);
             display: flex;
             justify-content: center;
-            margin-bottom: 10px;
+            align-items: center;
+        }
+        table {
+            width: 90%;
+            text-align: center;
         }
         #start-input, #end-input {
             padding: 5px;
             margin-right: 5px;
         }
         #info-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        top: 0;
+        left: 50px;
         }
+
         .info {
             margin-right: 10px;
         }
@@ -44,6 +67,23 @@
         <div class="info" id="walking-info"></div>
     </div>
     <div id="map"></div>
+    <div id="table-container">
+        <table>
+            <caption>Common Co2 emissions</caption>
+            <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+            </tr>
+            <tr>
+                <td>Row 1, Column 1</td>
+                <td>Row 1, Column 2</td>
+            </tr>
+            <tr>
+                <td>Row 2, Column 1</td>
+                <td>Row 2, Column 2</td>
+            </tr>
+        </table>
+    </div>
     <div id="fact"></div>
 
     <script src="{% static 'map/map.js' %}"></script>
