@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'event',
     'qr_code',
     'chat',
+    'map',
 ]
 
 MIDDLEWARE = [
