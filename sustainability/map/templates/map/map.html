@@ -8,26 +8,50 @@
         document.write(`<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places"></` + `script>`);
     </script>
     <style>
-        #map {
-            height: 500px;
-            width: 100%;
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
         }
         #search-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            height: calc(40% - 20px);
+            width: calc(20% - 20px);
             display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
+            flex-direction: column;
         }
         #start-input, #end-input {
             padding: 5px;
-            margin-right: 5px;
+            margin-bottom: 5px;
         }
-        #info-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
+        #text-box {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: white;
+            border-radius: 5px;
         }
-        .info {
-            margin-right: 10px;
+        #map {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            height: calc(70% - 20px);
+           
+            width: calc(70% - 20px);
+        }
+        #phone-container {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: calc((50% - 20px) * 9 / 16);
+            height: calc(50% - 20px);
+            background-color: #ccc;
+            border: 1px solid #999;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -37,14 +61,13 @@
         <input id="end-input" type="text" placeholder="End location">
         <button id="submit-btn">Submit</button>
     </div>
-    <div id="info-container">
-        <div class="info" id="driving-info"></div>
-        <div class="info" id="public-transport-info"></div>
-        <div class="info" id="cycling-info"></div>
-        <div class="info" id="walking-info"></div>
+    <div id="text-box">
+        <p>Fact about xyz here</p>
     </div>
     <div id="map"></div>
-
+    <div id="phone-container">
+        <!-- Mobile phone content here -->
+    </div>
     <script src="{% static 'map/map.js' %}"></script>
 </body>
 </html>
