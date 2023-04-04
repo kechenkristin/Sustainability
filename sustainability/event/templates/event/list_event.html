@@ -25,11 +25,13 @@
                                 <p class="small mb-0"><i class="far fa-star fa-lg"></i> <span class="mx-2">|</span>
                                     Created
                                     by
-                                    <strong>{{ obj.submitter.username }}</strong> on {{ obj.event_date }} with {{ obj.event_points }} points</p>
+                                    <strong>{{ obj.submitter.username }}</strong> on {{ obj.event_date }}
+                                    with {{ obj.event_points }} points</p>
                                 <br>
                                 <p class="small mb-0"><i class="far fa-star fa-lg"></i> <span class="mx-2">|</span>
                                     Participants:
                                     <strong>{{ obj.event_participant.user.username }}</strong></p>
+                                <p class="small mb-0">{{ obj.event_url }}</p>
                                 <hr class="my-4">
                                 <p class="small mb-0">{{ obj.event_description }}</p>
                                 <hr class="my-4">
@@ -37,7 +39,8 @@
                                 <a class="btn btn-primary" type="button" href="/event/{{ obj.id }}/finish">Finish</a>
 
                                 {% if user.id == obj.submitter.id %}
-                                <a class="btn btn-primary" type="button" href="/event/{{ obj.id }}/remove">Remove</a>
+                                    <a class="btn btn-primary" type="button"
+                                       href="/event/{{ obj.id }}/remove">Remove</a>
                                 {% endif %}
                             </div>
                         </div>

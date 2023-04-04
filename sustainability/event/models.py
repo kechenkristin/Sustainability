@@ -18,6 +18,7 @@ class Event(models.Model):
     event_date = models.DateField(null=True)
     event_points = models.BigIntegerField()
     event_description = models.TextField(null=True)
+    event_url = models.URLField(max_length=200, default="http://127.0.0.1:8000")
 
     event_participant = models.ForeignKey(
         Profile,

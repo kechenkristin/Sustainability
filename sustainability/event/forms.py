@@ -17,7 +17,9 @@ class AddEventForm(forms.ModelForm):
                                  widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}))
 
     event_description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    event_url = forms.URLField(required=True,
+                               widget=forms.URLInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Event
-        fields = ['event_name', 'event_points', 'event_date', 'event_description']
+        fields = ['event_name', 'event_points', 'event_date', 'event_description', 'event_url']
