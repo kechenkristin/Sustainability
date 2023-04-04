@@ -1,0 +1,28 @@
+.fetchButton {
+    height: 100%;
+    margin-left: -50px;
+    background: none;
+    border:none;
+}
+
+.submit {
+    margin-top: 5%;
+    margin-left: -10%;
+    width: 80%;
+    height: 50px;
+}
+
+.chatItems {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    width: 70%;
+    height: 90%;
+}
+
+input[type="text"] {
+    padding-right: 60px;
+}

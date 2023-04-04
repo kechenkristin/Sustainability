@@ -1,0 +1,32 @@
+
+@font-face {
+    font-family: 'Raleway', sans-serif;
+    src: url("../../assets/fonts/Raleway-VariableFont_wght.ttf");
+}
+
+
+.background {
+    display: flex;
+    font-family: Raleway;
+    padding: 3%;
+
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    padding-left: 3%;
+    padding-top: 5%;
+}
+
+.right {
+    width: 35%;
+    height: 60vh;
+}
+
+.favouriteLogo {
+    font-size: 2.5vh;
+    margin-bottom: 5%;
+    margin-top: 3%;
+}
