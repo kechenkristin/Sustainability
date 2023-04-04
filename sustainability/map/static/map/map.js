@@ -1,8 +1,10 @@
 // Initialize the map
 const map = new google.maps.Map(document.getElementById('map'), {
-  center: { lat: 0, lng: 0 },
-  zoom: 2
+  center: { lat: 50.733218984142624, lng: -3.5352645494120023 },
+  zoom: 15
 });
+
+// lat: 50.733218984142624, lng: -3.5352645494120023
 
 // Initialize the search inputs and button
 const startInput = document.getElementById('start-input');
@@ -54,6 +56,8 @@ function updateRoute(start, end, mode, infoElementId, renderer, co2Factor, costF
     }
   );
 }
+
+
 
 
 // Function to update the public transport route
