@@ -50,7 +50,7 @@ function updateRoute(start, end, mode, infoElementId, renderer, co2Factor, costF
     // Create the Google Maps link
     const googleMapsLinkElement = document.getElementById(googleMapsLinkElementId);
   const googleMapsLink = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(start)}&destination=${encodeURIComponent(end)}&travelmode=${mode.toLowerCase()}`;
-  googleMapsLinkElement.innerHTML = `<a href="${googleMapsLink}" target="_blank">Open in Google Maps</a>`;
+  googleMapsLinkElement.innerHTML = `<a href="${googleMapsLink}" target="_blank" onclick="updateDatabase()">Open in Google Maps</a>`;
 
 
     // Set the route for the renderer
@@ -110,7 +110,8 @@ function updatePublicTransportRoute(start, end, infoElementId, renderer, googleM
             // Create the Google Maps link
             const googleMapsLinkElement = document.getElementById(googleMapsLinkElementId);
             const googleMapsLink = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(start)}&destination=${encodeURIComponent(end)}&travelmode=${google.maps.TravelMode.TRANSIT}&dirflg=r`;
-            googleMapsLinkElement.innerHTML = `<a href="${googleMapsLink}" target="_blank">Open in Google Maps</a>`;
+            googleMapsLinkElement.innerHTML = `<a href="${googleMapsLink}" target="_blank" onclick="updateDatabase()">Open in Google Maps</a>`;
+
           } else {
             window.alert('Transit directions request failed due to ' + transitStatus);
           }
@@ -122,6 +123,70 @@ function updatePublicTransportRoute(start, end, infoElementId, renderer, googleM
   });
 }
 
+function updateDatabase() {
+  const csrftoken = getCookie('csrftoken');
+
+  // Add data to send to the server
+  const data = {
+    some_field: "some_value"
+  };
+
+  fetch('update_database/', {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': csrftoken,
+    },
+    // Convert data object to JSON string
+    body: JSON.stringify(data)
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Failed to update database');
+      }
+    })
+    .then((json) => {
+      if (json.status === 'success') {
+        console.log('Database updated successfully');
+      } else {
+        console.log('Failed to update database');
+      }
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+}
+
+
+
+// Get CSRF token from cookies
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
+// Add event listeners to Google Maps links
+const drivingMapsLinkElement = document.getElementById('driving-maps-link');
+const publicTransportMapsLinkElement = document.getElementById('public-transport-maps-link');
+const cyclingMapsLinkElement = document.getElementById('cycling-maps-link');
+const walkingMapsLinkElement = document.getElementById('walking-maps-link');
+
+drivingMapsLinkElement.addEventListener('click', updateDatabase);
+publicTransportMapsLinkElement.addEventListener('click', updateDatabase);
+cyclingMapsLinkElement.addEventListener('click', updateDatabase);
+walkingMapsLinkElement.addEventListener('click', updateDatabase);
 
 
 // Handle the submit button click
