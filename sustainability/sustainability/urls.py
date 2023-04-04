@@ -30,5 +30,5 @@ urlpatterns = [
                   path('event/', include('event.urls')),
                   path('react/', include('chat.urls')),
                   path('map/', include('map.urls')),
-
+                  path('advice/',include('advice.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

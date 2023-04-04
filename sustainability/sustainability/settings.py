@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_gdi1h6314borx4k1%osq03im-3f1x%b(dsd_0037awzik$=+4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'qr_code',
     'chat',
     'map',
+    'advice',
 ]
 
 MIDDLEWARE = [
@@ -127,6 +128,17 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR.parent, 'frontend/build/static'),
     os.path.join(BASE_DIR, 'users/static')
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -64,7 +64,7 @@ const ChatAdvices = () => {
 
     return (
         <div className={classes.chatItems}>
-            {isLoading ? "Loading..." : <Advices response={adviceText} active={isActive}>
+            {isLoading ? "Loading..." : <Advices response={adviceText} active={isActive} question={userInput}>
             </Advices>}
 
             <div className={classes.submit}>
