@@ -93,8 +93,6 @@
 {% endblock %}
 
 {% block content %}
-
-    <div class="jumbotron vertical-center">
     <div id="search-container">
         <input id="start-input" type="text" placeholder="Start location">
         <input id="end-input" type="text" placeholder="End location">
@@ -110,7 +108,14 @@
         <div class="info" id="walking-info"></div>
         <div class="info" id="walking-maps-link"></div>
     </div>
-    <div id="map"></div>
+
+    <div class="jumbotron vertical-center">
+        <div id="map"></div>
+    </div>
+
+
+
+
     <div id="table-container">
         <table>
             <caption><strong>Real life use cases</strong></caption>
@@ -188,7 +193,5 @@
             </tbody>
         </table>
     </div>
-
     <script src="{% static 'map/map.js' %}"></script>
-    </div>
 {% endblock %}
