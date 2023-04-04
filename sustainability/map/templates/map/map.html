@@ -1,8 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
     <title>Google Maps Integration</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+    <script src="{% static 'map/apikey.js' %}"></script>
+    <script>
+        document.write(`<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places"></` + `script>`);
+    </script>
     <style>
         #map {
             height: 500px;

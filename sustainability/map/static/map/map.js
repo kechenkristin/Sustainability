@@ -1,7 +1,7 @@
 // Initialize the map
 const map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 0, lng: 0 },
-    zoom: 2
+  center: { lat: 0, lng: 0 },
+  zoom: 2
 });
 
 // Initialize the search inputs and button
@@ -23,86 +23,95 @@ const bicyclingRenderer = new google.maps.DirectionsRenderer({map: map, suppress
 const walkingRenderer = new google.maps.DirectionsRenderer({map: map, suppressMarkers: true});
 
 // Function to update the route
-function updateRoute(start, end, mode, infoElementId, renderer) {
-  directionsService.route(
-    {
-      origin: start,
-      destination: end,
-      travelMode: mode
-    },
-    (response, status) => {
-      if (status === google.maps.DirectionsStatus.OK) {
-        const route = response.routes[0].legs[0];
-        const distance = route.distance.text;
-        const duration = route.duration.text;
+function updateRoute(start, end, mode, infoElementId, renderer, co2Factor) {
+directionsService.route(
+  {
+    origin: start,
+    destination: end,
+    travelMode: mode
+  },
+  (response, status) => {
+    if (status === google.maps.DirectionsStatus.OK) {
+      const route = response.routes[0].legs[0];
+      const distance = route.distance.text;
+      const distanceInKm = parseFloat(distance.replace(',', '').split(' ')[0]);
+      const duration = route.duration.text;
 
-        const infoElement = document.getElementById(infoElementId);
-        infoElement.innerHTML = `<strong>${mode}</strong><br>Distance: ${distance}<br>Duration: ${duration}`;
+      // Calculate CO2 emissions
+      const co2Emissions = (distanceInKm * co2Factor).toFixed(2);
 
-        // Set the route for the renderer
-        renderer.setDirections(response);
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
+      const infoElement = document.getElementById(infoElementId);
+      infoElement.innerHTML = `<strong>${mode}</strong><br>Distance: ${distance}<br>Duration: ${duration}<br>CO2 Emitted: ${co2Emissions} grams`;
+
+      // Set the route for the renderer
+      renderer.setDirections(response);
+    } else {
+      window.alert('Directions request failed due to ' + status);
     }
-  );
+  }
+);
 }
 
 // Function to update the public transport route
 function updatePublicTransportRoute(start, end, infoElementId, renderer) {
-  const transitMode = google.maps.TransitMode.TRAIN; // or use 'BUS' or 'SUBWAY' or 'TRAM'
+const transitMode = google.maps.TransitMode.TRAIN; // or use 'BUS' or 'SUBWAY' or 'TRAM'
+const co2Factor = 76;
 
-  const request = {
-    origins: [start],
-    destinations: [end],
-    travelMode: google.maps.TravelMode.TRANSIT,
-    transitOptions: {
-      modes: [transitMode],
-    },
-    unitSystem: google.maps.UnitSystem.METRIC,
-  };
+const request = {
+  origins: [start],
+  destinations: [end],
+  travelMode: google.maps.TravelMode.TRANSIT,
+  transitOptions: {
+    modes: [transitMode],
+  },
+  unitSystem: google.maps.UnitSystem.METRIC,
+};
 
-  const matrixService = new google.maps.DistanceMatrixService();
-  matrixService.getDistanceMatrix(request, (response, status) => {
-    if (status === google.maps.DistanceMatrixStatus.OK) {
-      const results = response.rows[0].elements;
-      const distance = results[0].distance.text;
-      const duration = results[0].duration.text;
+const matrixService = new google.maps.DistanceMatrixService();
+matrixService.getDistanceMatrix(request, (response, status) => {
+  if (status === google.maps.DistanceMatrixStatus.OK) {
+    const results = response.rows[0].elements;
+    const distance = results[0].distance.text;
+    const distanceInKm = parseFloat(distance.replace(',', '').split(' ')[0]);
+    const duration = results[0].duration.text;
 
-      const infoElement = document.getElementById(infoElementId);
-      infoElement.innerHTML = `<strong>Public Transport</strong><br>Distance: ${distance}<br>Duration: ${duration}>`;
-      
-      directionsService.route(
-        {
-          origin: start,
-          destination: end,
-          travelMode: google.maps.TravelMode.TRANSIT,
-          transitOptions: {
-            modes: [transitMode],
-          },
+    // Calculate CO2 emissions
+    const co2Emissions = (distanceInKm * co2Factor).toFixed(2);
+
+    const infoElement = document.getElementById(infoElementId);
+    infoElement.innerHTML = `<strong>Public Transport</strong><br>Distance: ${distance}<br>Duration: ${duration}<br>CO2 Emitted: ${co2Emissions} grams`;
+
+    directionsService.route(
+      {
+        origin: start,
+        destination: end,
+        travelMode: google.maps.TravelMode.TRANSIT,
+        transitOptions: {
+          modes: [transitMode],
         },
-        (transitResponse, transitStatus) => {
-          if (transitStatus === google.maps.DirectionsStatus.OK) {
-            renderer.setDirections(transitResponse);
-          } else {
-            window.alert('Transit directions request failed due to ' + transitStatus);
-          }
+      },
+      (transitResponse, transitStatus) => {
+        if (transitStatus === google.maps.DirectionsStatus.OK) {
+          renderer.setDirections(transitResponse);
+        } else {
+          window.alert('Transit directions request failed due to ' + transitStatus);
         }
-      );
-    } else {
-      window.alert('Distance Matrix request failed due to ' + status);
-    }
-  });
+      }
+    );
+  } else {
+    window.alert('Distance Matrix request failed due to ' + status);
+  }
+});
 }
 
 // Handle the submit button click
 submitBtn.addEventListener('click', () => {
-  const startLocation = startInput.value;
-  const endLocation = endInput.value;
+const startLocation = startInput.value;
+const endLocation = endInput.value;
 
-  updateRoute(startLocation, endLocation, google.maps.TravelMode.DRIVING, 'driving-info', drivingRenderer);
-  updatePublicTransportRoute(startLocation, endLocation, 'public-transport-info', transitRenderer);
-  updateRoute(startLocation, endLocation, google.maps.TravelMode.BICYCLING, 'cycling-info', bicyclingRenderer);
-  updateRoute(startLocation, endLocation, google.maps.TravelMode.WALKING, 'walking-info', walkingRenderer);
+updateRoute(startLocation, endLocation, google.maps.TravelMode.DRIVING, 'driving-info', drivingRenderer, 138.4);
+updatePublicTransportRoute(startLocation, endLocation, 'public-transport-info', transitRenderer);
+updateRoute(startLocation, endLocation, google.maps.TravelMode.BICYCLING, 'cycling-info', bicyclingRenderer, 10);
+updateRoute(startLocation, endLocation, google.maps.TravelMode.WALKING, 'walking-info', walkingRenderer, 5);
 });
 
