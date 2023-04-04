@@ -12,7 +12,7 @@
                 <span class="up">HI!</span>
                 <span class="down">{{ user.first_name.title|default:'Guest' }}</span>
             </h1>
-            <p class="header-subtitle">FRONTEND WEB DESIGNER</p>
+            <p class="header-subtitle">LEAVE A LIGHTER FOOTPRINT.</p>
 
             {% if user.is_authenticated %}
                 <a class="btn btn-primary btn-lg" href="{% url 'logout' %}" role="button">Logout</a>
