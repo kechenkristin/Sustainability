@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TomTom Map Integration</title>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.14.0-public-preview.4/maps/maps-web.min.js"></script>
+    <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.14.0-public-preview.4/maps/maps.css">
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+        #search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        #start-input, #end-input {
+            padding: 5px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="search-container">
+        <input id="start-input" type="text" placeholder="Start location">
+        <input id="end-input" type="text" placeholder="End location">
+        <button id="submit-btn">Submit</button>
+    </div>
+    <div id="map"></div>
+
+    <script src="{% static 'mapapp/map.js' %}"></script>
+</body>
+</html>
