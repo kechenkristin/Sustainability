@@ -10,14 +10,12 @@ import sendButton from "../assets/sendIcon.png";
 
 const ChatAdvices = () => {
 
-    let response = 'hello';
     const [textData, setTextData] = useState('');
     const [adviceText, setAdviceText] = useState("You can write any action and you will get advices how to make it more sustainable! \n For example: i'm going to drink water! ");
 
     const [userInput, setUserInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isActive, setActive] = useState(false);
-
 
 
     const fetchAdvice = async () => {
@@ -29,7 +27,7 @@ const ChatAdvices = () => {
                     "Make one advice be limited by 450 characters"}]
 
         };
-
+        console.log(requestBody);
         try {
             const response = await axios.post("https://api.openai.com/v1/chat/completions", requestBody, {
                 headers: {
@@ -37,7 +35,6 @@ const ChatAdvices = () => {
                     "Authorization": `Bearer ${textData}`
                 }
             });
-
             console.log("This is response")
 
             const advice = response.data.choices[0].message.content;

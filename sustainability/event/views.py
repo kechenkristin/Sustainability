@@ -20,7 +20,14 @@ add event when user logined
 def add_event(request):
     if request.method == 'POST':
         event_add_form = AddEventForm(request.POST)
+        print('this is event')
+        headers = {}
+        for key, value in request.META.items():
+            if key.startswith('HTTP_'):
+                header_key = key[5:].replace('_', '-')
+                headers[header_key] = value
 
+        print(headers)
         if event_add_form.is_valid():
             event_add_form.save()
 

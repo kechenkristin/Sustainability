@@ -16,7 +16,7 @@ const Advices = ({ response, active , question}) => {
         setLikes(newLikes);
 
         try {
-            await axios.post("http://localhost:8000/advice/like_advice", {
+            await axios.post("http://localhost:8000/advice/like_advice/", {
                 text: articles[index],
                 question:question,
             });
