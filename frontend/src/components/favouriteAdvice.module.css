@@ -17,6 +17,9 @@
     align-self: center;
     font-size: 2.3vh;
 }
+
+/* favouriteAdvice.module.css */
+
 .articleContainer {
     display: flex;
     align-items: center;

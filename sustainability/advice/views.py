@@ -8,6 +8,22 @@ from django.shortcuts import get_object_or_404
 from .models import Advice
 from .serializers import AdviceSerializer
 
+class IncrementLikesAPIView(APIView):
+    authentication_classes = []  # Override the default authentication classes
+    permission_classes = []  # Override the default permission classes
+
+    def post(self, request):
+        advice_text = request.data.get('text')
+
+        if not advice_text:
+            return Response({"message": "No text provided."}, status=400)
+
+        advice = Advice.objects.filter(Q(text__icontains=advice_text) | Q(text__iexact=advice_text)).first()
+        if advice:
+            advice.increment_likes()
+            return Response({"message": f"Likes for advice {advice.id} with text '{advice_text}' increased by 1."})
+        else:
+            return Response({"message": f"No advice found with text '{advice_text}'."}, status=404)
 
 class LikeAdviceView(APIView):
     def post(self, request, *args, **kwargs):
@@ -46,19 +62,3 @@ class ListFavoriteAdvicesView(APIView):
         serializer = AdviceSerializer(advices, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-class IncrementLikesAPIView(APIView):
-    authentication_classes = []  # Override the default authentication classes
-    permission_classes = []  # Override the default permission classes
-
-    def post(self, request):
-        advice_text = request.data.get('text')
-
-        if not advice_text:
-            return Response({"message": "No text provided."}, status=400)
-
-        advice = Advice.objects.filter(Q(text__icontains=advice_text) | Q(text__iexact=advice_text)).first()
-        if advice:
-            advice.increment_likes()
-            return Response({"message": f"Likes for advice {advice.id} with text '{advice_text}' increased by 1."})
-        else:
-            return Response({"message": f"No advice found with text '{advice_text}'."}, status=404)
