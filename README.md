@@ -25,5 +25,5 @@ Google Maps API
 * Go to https://developers.google.com/maps
 * Generate an API key
 * Make a new file: Sustainability\sustainability\map\static\map\apikey.js
-* In this file: ```javascript const GOOGLE_MAPS_API_KEY = 'YOUR_API_KEY';```
+* In this file inlcude: ```const GOOGLE_MAPS_API_KEY = 'YOUR_API_KEY';```
 * Done
