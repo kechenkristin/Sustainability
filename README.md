@@ -15,5 +15,15 @@ Features
 
 Deployment
 * Install Django and Dependencies (not provided)
+* Generate a Google maps API key - maps will not work without it
+* cd to frontend and run ```npm install && npm run build```
 * cd to the folder with manage.py (sustainability)
 * run ```python manage.py runserver```
+
+
+Google Maps API
+* Go to https://developers.google.com/maps
+* Generate an API key
+* Make a new file: Sustainability\sustainability\map\static\map\apikey.js
+* In this file: ```javascript const GOOGLE_MAPS_API_KEY = 'YOUR_API_KEY';```
+* Done
