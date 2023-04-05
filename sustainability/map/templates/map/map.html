@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+    <title>GreenWays Map :)</title>
+    <link rel="icon" href="{% static 'map/icon.png' %}">
+    <script src="{% static 'map/apikey.js' %}"></script>
+    <script>
+        document.write(`<script src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places"></` + `script>`);
+    </script>
+    <style>
+        body{
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+        #map {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70%;
+            height: 70%;
+        }
+        #search-container {
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        width: 40%; /* Increase the width to make room for both elements */
+        transform: translateX(-50%);
+        display: flex; /* Add flex display to allow for side by side elements */
+        justify-content: center; /* Center the elements horizontally within the container */
+        align-items: center; /* Center the elements vertically within the container */
+    }
+
+    #search-container input {
+        margin-right: 5px; /* Add a small margin between the elements */
+    }
+    #back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+}
+#back-button img {
+    width: 10%;
+    height: auto;
+}
+
+        #table-container {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 30%;
+            height: 70%;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        table {
+            width: 90%;
+            text-align: center;
+        }
+        #start-input, #end-input {
+            padding: 5px;
+            margin-right: 5px;
+            width: 100%;
+        }
+        #info-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 50px;
+    left: 50%; /* Center the container horizontally */
+    transform: translateX(-50%);
+}
+
+
+        .info {
+            margin-right: 10px;
+        }
+        .info-value {
+        font-size: 18px;
+        font-weight: bold;
+        }
+        .co2-cost {
+        font-size: 1.2em;
+        }
+        caption {
+    font-size: 200%; /* Increase font size by 20% */
+}
+    </style>
+</head>
+<body>
+  <a href="javascript:history.back()" id="back-button">
+    <img src="{% static 'map/logo.jpeg' %}" alt="Back">
+</a>
+
+    <div id="search-container">
+        <input id="start-input" type="text" placeholder="Start location">
+        <input id="end-input" type="text" placeholder="End location">
+        <button id="submit-btn">Submit</button>
+    </div>
+    <div id="info-container">
+        <div class="info" id="driving-info"></div>
+        <div class="info" id="driving-maps-link"></div>
+        <div class="info" id="public-transport-info"></div>
+        <div class="info" id="public-transport-maps-link"></div>
+        <div class="info" id="cycling-info"></div>
+        <div class="info" id="cycling-maps-link"></div>
+        <div class="info" id="walking-info"></div>
+        <div class="info" id="walking-maps-link"></div>
+    </div>
+    <div id="map"></div>
+    <div id="table-container">
+        <table>
+            <caption ><strong>Real life use cases</strong></caption>
+            <thead>
+              <tr>
+                <th>Action</th>
+                <th>CO2 Emissions (grams)</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Single Credit card payment</td>
+                    <td>4</td>
+                  </tr>
+              <tr>
+                <td>Charging a smartphone for 2 hours</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td>Streaming on Netflix for an hour</td>
+                <td>36</td>
+              </tr>
+              <tr>
+                <td>Using an electric kettle to boil water</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Making a cup of tea/coffee</td>
+                <td>71</td>
+              </tr>
+              <tr>
+                <td>Making a 500ml plastic bottle</td>
+                <td>82</td>
+              </tr>
+              <tr>
+                <td>30 minutes on Instagram</td>
+                <td>93</td>
+              </tr>
+              <tr>
+                <td>Watching TV for 3 hours</td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td>Using a desktop computer for 1 hour</td>
+                <td>200</td>
+              </tr>
+              <tr>
+                <td>Taking a 10-minute shower</td>
+                <td>250</td>
+              </tr>
+              <tr>
+                <td>Using a washing machine for 1 hour</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>One hour virtual meeting</td>
+                <td>1,000</td>
+              </tr>
+              <tr>
+                <td>Running a clothes dryer for 1 hour</td>
+                <td>1,500</td>
+              </tr>
+              <tr>
+                <td>Using an electric oven for 1 hour</td>
+                <td>2,000</td>
+              </tr>
+              <tr>
+                <td>Eating a serving of beef</td>
+                <td>2,500</td>
+              </tr>
+              <tr>
+                <td>Taking a round-trip flight from New York to Los Angeles</td>
+                <td>1,600,000</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          
+    </div>
+    <div id="fact"></div>
+
+    <script src="{% static 'map/map.js' %}"></script>
+    
+</body>
+</html>

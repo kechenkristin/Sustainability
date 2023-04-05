@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load qr_code %}
+{% block content %}
+    <div class="jumbotron vertical-center">
+        <div class="container">
+            <h3>Event QR Code'</h3>
+            {% qr_for_event event=event %}
+        </div>
+    </div>
+{% endblock %}

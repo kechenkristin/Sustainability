@@ -1,0 +1,52 @@
+
+.board {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-top: 10%;
+    border-radius: 9px;
+    border: 1px solid #000000;
+    height: 100%;
+    overflow-y: scroll;
+    gap:60px;
+}
+
+.article {
+    display: flex;
+    padding:4%;
+    align-self: center;
+    font-size: 2.3vh;
+}
+
+/* favouriteAdvice.module.css */
+
+.articleContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.circleButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    border: none;
+    margin-left: 15px;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.3s;
+}
+
+.circleButton:active {
+    transform: scale(0.9);
+}
+
+.circleButton:focus {
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5);
+}

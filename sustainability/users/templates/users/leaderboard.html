@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}User Profile List Page{% endblock title %}
+{% block content %}
+
+    <div class="jumbotron vertical-center">
+        <div class="container">
+            <div>
+                <div class="panel panel-default">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Img</th>
+                            <th>UserName</th>
+                            <th>Points</th>
+                            <th>Operate Profile</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for obj in user_profile_list %}
+                            <tr>
+                                <th>{{ obj.user.id }}</th>
+                                <th><img
+                                        src="{% if obj.avatar %}{{ obj.avatar.url }}{% else %}{% endif %}"
+                                        alt="avatar"
+                                        class="rounded-circle img-fluid" style="width: 150px;"></th>
+                                <th>{{ obj.user.username }}</th>
+                                <th>{{ obj.points }}</th>
+                                <th>
+                                    <a class="btn btn-primary" href="/users/{{ obj.id }}/profile">See Profile</a>
+                                    {% if cuid == obj.id %}
+                                        <a class="btn btn-danger" href=" {% url 'users-profile-edit' %}">Edit
+                                            Profile</a>
+                                    {% endif %}
+                                </th>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

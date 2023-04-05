@@ -9,13 +9,13 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+REACT_DIR = os.path.abspath(os.path.join(BASE_DIR, '../frontend/build'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -25,9 +25,15 @@ SECRET_KEY = 'django-insecure-_gdi1h6314borx4k1%osq03im-3f1x%b(dsd_0037awzik$=+4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','.ngrok.io',"http://localhost:8000", "http://localhost:3000",'localhost',]
 
-
+# Specify allowed connection origins
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:3000',"http://20.121.251.196","http://127.0.0.1:8000",'http://localhost:8000'
+]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000","http://20.121.251.196","http://127.0.0.1:8000"]
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,10 +43,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'users',
+    'news',
+    'event',
+    'qr_code',
+    'chat',
+    'map',
+    'advice',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,8 +69,8 @@ ROOT_URLCONF = 'sustainability.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
         'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR.parent, 'frontend/build')],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -118,7 +132,24 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR.parent, 'frontend/build/static'),
+    os.path.join(BASE_DIR, 'users/static')
+]
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# session management, remember me feature
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+
+# LOGIN_REDIRECT_URL tells django to redirect the user to the home page after a successful login
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+
+# media config
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
