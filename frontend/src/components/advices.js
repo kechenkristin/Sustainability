@@ -12,17 +12,29 @@ const Advices = ({ response, active , question}) => {
 
     const toggleLike = async (index) => {
         const newLikes = [...likes];
+
+        if(!newLikes[index]) {
+            try {
+                await axios.post("http://localhost:8000/advice/like_advice/", {
+                    text: articles[index],
+                    question:question,
+                });
+            } catch (error) {
+                console.error("Error sending favorite status:", error);
+            }
+        }
+        else {
+            try {
+                await axios.post("http://localhost:8000/advice/unlike_advice/", {
+                    text: articles[index],
+                    question:question,
+                });
+            } catch (error) {
+                console.error("Error sending favorite status:", error);
+            }
+        }
         newLikes[index] = !newLikes[index];
         setLikes(newLikes);
-
-        try {
-            await axios.post("http://localhost:8000/advice/like_advice/", {
-                text: articles[index],
-                question:question,
-            });
-        } catch (error) {
-            console.error("Error sending favorite status:", error);
-        }
     };
 
     return (

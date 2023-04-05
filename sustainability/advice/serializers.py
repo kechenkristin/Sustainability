@@ -5,4 +5,4 @@ from .models import Advice
 class AdviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advice
-        fields = ('text', 'question')
+        fields = ('text', 'question','likes')

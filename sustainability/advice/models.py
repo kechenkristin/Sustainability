@@ -5,12 +5,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Advice(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="liked_advices")
     text = models.TextField()
     question = models.TextField()
+    likes = models.IntegerField(default=0)
 
-    class Meta:
-        unique_together = ('user', 'text', 'question')
-
-    def __str__(self):
-        return f"{self.user.username} - {self.question1} / {self.question2}"
+    def increment_likes(self):
+        self.likes += 1
+        self.save()
