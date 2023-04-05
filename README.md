@@ -1,4 +1,6 @@
 [![logo](sustainability/map/static/map/logo.jpeg)](https://greenways.life)
+Leave a lighter footprint
+------
 
 GreenWays is a platform aimed at promoting sustainable living and raising awareness about climate change. It enables users to connect with like-minded individuals, share ideas, track their eco-friendly actions, and participate in events to promote sustainability.
 
