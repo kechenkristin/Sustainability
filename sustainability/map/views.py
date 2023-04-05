@@ -14,7 +14,7 @@ def update_database(request):
         try:
             # Load JSON data from request body
             data = json.loads(request.body)
-            some_field = data.get('some_field', '')
+            score_inc = data.get('score_increment', '')
 
             # Perform necessary database updates
             current_user = request.user
@@ -32,8 +32,8 @@ def update_database(request):
             else:
                 user_id = result[0]
 
-                # Update the user's score 100points
-                query = f"UPDATE users_profile SET points = points + 100 WHERE id = {user_id}"
+                # Update the user's score 1points
+                query = f"UPDATE users_profile SET points = points + {score_inc} WHERE id = {user_id}"
                 cursor.execute(query)
 
                 # Commit the changes and close the connection
