@@ -12,6 +12,12 @@
 
 }
 
+.logo {
+    width: 15%;
+}
+.logoPhoto {
+    width: 100%;
+}
 .left {
     display: flex;
     flex-direction: column;

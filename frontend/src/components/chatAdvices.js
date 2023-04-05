@@ -23,8 +23,8 @@ const ChatAdvices = () => {
         const requestBody = {
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: 'Act as a sustainability expert. There is a user that wants to do the action: '+userInput +
-            ". Write exactly 4 advices how to make that action more sustainable.  Use statistic , examples and comparisons to make user motivated about following the advices. Try to sound less generic. Make these advices be numbered. " +
-                    "Make one advice be limited by 450 characters"}]
+            ". Write exactly 4 advices with 450 characters limit how to make that action more sustainable.  Use statistic , examples and comparisons to make user motivated about following the advices. Try to sound less generic. Make these advices be numbered." +
+                    " Advices be concise in order to keep user attention (avoid large bulk of text). Balance proportion of large and small advices."}]
 
         };
         console.log(requestBody);

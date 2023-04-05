@@ -15,7 +15,7 @@ const Advices = ({ response, active , question}) => {
 
         if(!newLikes[index]) {
             try {
-                await axios.post("http://localhost:8000/advice/like_advice/", {
+                await axios.post("https://c568-144-173-23-52.ngrok.io/advice/like_advice/", {
                     text: articles[index],
                     question:question,
                 });
@@ -25,7 +25,7 @@ const Advices = ({ response, active , question}) => {
         }
         else {
             try {
-                await axios.post("http://localhost:8000/advice/unlike_advice/", {
+                await axios.post("https://c568-144-173-23-52.ngrok.io/advice/unlike_advice/", {
                     text: articles[index],
                     question:question,
                 });

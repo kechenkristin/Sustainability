@@ -4,12 +4,12 @@ import classes from "./favouriteAdvice.module.css"
 import axios from "axios";
 
 const FavouriteAdvice = () => {
-    const [favourites, setFavourites] = useState(['Make tea','Be happy','Dance']);
-    const [loading, setLoading] = useState(false);
+    const [favourites, setFavourites] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = () => {
-            fetch("http://localhost:8000/advice/favorite_advices/")
+            fetch("https://c568-144-173-23-52.ngrok.io/advice/favorite_advices/")
                 .then(response => response.json())
                 .then(data => {
                     const updatedData = data.map((item) => {
@@ -19,7 +19,7 @@ const FavouriteAdvice = () => {
                             text: `[${item.question}] ${newText}`,
                         };
                     });
-                    setFavourites(updatedData);
+                    setFavourites(data);
                     setLoading(false);
                 })
                 .catch(error => {
@@ -40,8 +40,8 @@ const FavouriteAdvice = () => {
     const handleButtonClick = async (index) => {
         try {
             const response = await axios.post(
-                "http://localhost:8000/advice/increment_likes/",
-                { text: favourites[index].text }
+                "https://c568-144-173-23-52.ngrok.io/advice/increase/",
+                {text: favourites[index].text}
             );
             console.log(response.data);
             const updatedFavourites = [...favourites];
@@ -60,7 +60,7 @@ const FavouriteAdvice = () => {
                 favourites.map((favourite, index) => (
                     <div key={index} className={classes.articleContainer}>
                         <div key={index} className={classes.article}>
-                            {favourite.text}
+                            {'['+favourite.question+'] '+favourite.text.slice(3)}
                         </div>
                         <button
                             className={classes.circleButton}
